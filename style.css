@@ -6,30 +6,35 @@ body {
     flex-direction: column;
     align-items: center;
     box-sizing: border-box;
-    background-color: rgb(49, 104, 116);
+    background-color: #2B4865;
     color: rgb(41, 68, 109);
 }
 
 .main {
-    margin: 20px;
+    margin-top: 30px;
     display: flex;
-    background-color: red;
     width: 800px;
     justify-content: space-around;
+    z-index: 2;
+}
+
+h2 {
+    margin: 0;
+    color: #073458;
 }
 
 .contenedor{
     display: flex;
-    padding: 10px;
     border-radius: 10px;
     color: rgb(0, 0, 0);
-    /*background-color: rgb(233, 233, 233);
-    box-shadow: 0px 5px 5px black;*/
+    background-color: rgb(233, 233, 233);
+    box-shadow: 3px 5px 6px black;
 }
 
 .buscar {
     margin-top: 15px;
-    width: 170px;
+    width: 200px;
+    z-index: 2;
 }
 
 .contenedor div{
@@ -44,7 +49,7 @@ body {
     justify-content: center;
     align-items: center;
     border-radius: 10px;
-    background-color: rgb(233, 233, 233)
+    background-color: rgb(233, 233, 233);
 }
 
 input{
@@ -62,6 +67,7 @@ input:hover{
 
 .contactIMG{
     width: 130px;
+    margin: 10px;
     height: 130px;
 }
 
@@ -70,20 +76,19 @@ input:hover{
     align-items: center;
     display: flex;
     justify-content: center;
-    width: 400px;
-    padding: 10px;
-    background-color: chartreuse;
+    width: 100%;
+    padding: 0 10px;
     height: 480px;
 }
 
 ul{
-    background-color: blueviolet;
     display: flex;
     flex-direction: column;
     width: 100%;
     height: 100%;
-    padding: 10px;
-    gap: 10px;
+    padding-left: 0px;
+    padding-right: 5px;
+    gap: 15px;
     box-sizing: border-box;
     overflow-y: scroll;
     border-radius: 10px;
@@ -99,12 +104,16 @@ ul::-webkit-scrollbar-thumb{
 }
 
 li{
+    display: flex;
     width: 100%;
     list-style-type: none;
     border-radius: 10px;
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(233, 233, 233);
     padding: 10px;
     box-sizing: border-box;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 2px 2px 4px black;
     transition: box-shadow 500ms;
 }
 
@@ -112,11 +121,20 @@ li:hover{
     box-shadow: 0px 0px 5px black;
 }
 
-.empty{
+.vacio{
     display: none;
     flex-wrap: wrap;
     justify-content: center;
     text-align: center;
+}
+
+.despliegueBTN {
+    width: 25px;
+    height: 25px;
+    background-color: transparent;
+    margin-right: 10px;
+    border: none;
+    outline: none;
 }
 
 .img{
@@ -131,11 +149,44 @@ li:hover{
     flex-direction: column;
 }
 
-.btn-agregar {
+#btn-agregar {
     margin-top: 20px;
     border: 0;
-    background-color: rgba(68, 68, 223, 0.462);
+    background-color: rgba(41, 41, 190, 0.636);
     width: 90px;
+    color: white;
     border-radius: 10px;
     height: 30px;
+}
+
+.img {
+    width: 120px;
+    height: 120px;
+    position: absolute;
+    z-index: 1;
+    
+}
+
+#img1 {
+    right: 150px;
+    top: 100px;
+    opacity: 0.4;
+}
+
+#img2 {
+    left: 400px;
+    top: 300px;
+    opacity: 0.4;
+}
+
+#img3 {
+    left: 100px;
+    top: 70px;
+    opacity: 0.4;
+}
+
+#img4 {
+    left: 700px;
+    top: 550px;
+    opacity: 0.4;
 }
