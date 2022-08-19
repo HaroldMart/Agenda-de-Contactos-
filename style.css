@@ -113,6 +113,10 @@ input:hover{
     height: 480px;
 }
 
+.filtro{
+    display: none;
+}
+
 ul{
     display: flex;
     flex-direction: column;

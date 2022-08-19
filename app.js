@@ -129,3 +129,17 @@ function empty() {
             main.style.backgroundColor = "transparent";
         }   
 }
+
+document.addEventListener("keyup", e => {
+    if (e.target.matches('.buscar')){
+
+        if(e.key === 'Escape')e.target.value = "";
+
+        document.querySelectorAll('li').forEach(contacto => {
+            contacto.textContent.toLowerCase().includes(e.target.value.toLowerCase())
+                ?contacto.classList.remove('filtro')
+                :contacto.classList.add('filtro');
+        })
+    }
+    console.log(e.target.value)
+})
