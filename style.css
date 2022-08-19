@@ -16,6 +16,8 @@ body {
     width: 800px;
     justify-content: space-around;
     z-index: 2;
+    border-radius: 10px;
+    
 }
 
 h2 {
@@ -28,7 +30,7 @@ h2 {
     border-radius: 10px;
     color: rgb(0, 0, 0);
     background-color: rgb(233, 233, 233);
-    box-shadow: 3px 5px 6px black;
+    box-shadow: 0px 0px 6px black;
 }
 
 .buscar {
@@ -53,12 +55,19 @@ h2 {
 }
 
 input{
-    width: 220px;
+    width: 200px;
     height: 30px;
     border-radius: 10px;
     padding: 5px;
     border: none;
     transition: box-shadow 500ms;
+}
+
+.icons {
+    display: flex;
+    width: 40px;
+    background-color: red;
+    flex-direction: column;
 }
 
 input:hover{
@@ -69,6 +78,29 @@ input:hover{
     width: 130px;
     margin: 10px;
     height: 130px;
+}
+
+#desplegado {
+    display: none;
+    top: 200px;
+    border-radius: 10px;
+    position: absolute;
+    background-color: #ffffff;
+    color: green;
+    width: 500px;
+    height: 300px;
+    box-shadow: 0px 0px 6px rgba(0,0,0,0.2);
+    flex-direction: column;
+    padding: 12px;
+    z-index: 3;
+    transition: display 500ms;
+    transition-timing-function: ease;
+    animation: zoomIn;
+    animation-duration: 400ms;
+}
+
+.show-desplegado{
+    display: flex;
 }
 
 /*-------------------------------Contenedor Lista de contactos*/
@@ -126,9 +158,19 @@ li:hover{
     flex-wrap: wrap;
     justify-content: center;
     text-align: center;
+    background-color: rgb(233, 233, 233);
 }
 
 .despliegueBTN {
+    width: 25px;
+    height: 25px;
+    background-color: transparent;
+    margin-right: 10px;
+    border: none;
+    outline: none;
+}
+
+.borrarBtn{
     width: 25px;
     height: 25px;
     background-color: transparent;
