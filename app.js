@@ -3,9 +3,10 @@ const apellido = document.getElementById('apellido');
 const telefono = document.getElementById('telefono');
 const direccion = document.getElementById('direccion');
 const ul = document.querySelector('ul');
+const btn_mode = document.querySelector('#toogle')
 const agregar = document.getElementById('btn-agregar');
 const vacio = document.querySelector('.vacio');
-const main = document.querySelector('.main');
+const main = document.getElementById('main');
 let contactos = []
 let id = Date.now();
 
@@ -149,8 +150,18 @@ function empty() {
         if (items.length == 0){
             vacio.style.display = "flex";
             ul.style.display = "none";
-            main.style.backgroundColor = 'var(--bg-color)';
             main.style.boxShadow = 'box-shadow: 0px 0px 6px black;'
+
+            const body = document.querySelector('body')
+
+            if (body.className === 'dark') {
+                main.style.backgroundColor = '#15323e';
+                main.style.color = 'white'
+            } else {
+                main.style.backgroundColor = 'rgb(232, 232, 232)';
+                main.style.color = 'black'
+            }
+            
         } else{
             vacio.style.display = "none";
             main.style.backgroundColor = "transparent";
@@ -171,26 +182,21 @@ document.addEventListener("keyup", e => {
     console.log(e.target.value)
 })
 
-var dark_mode = JSON.parse(localStorage.getItem('pageView'));
+btn_mode.addEventListener("click", () => {
+    document.body.classList.toggle('dark')
 
-// function darkMode(){
-//     if (dark_mode == true){
-//         document.querySelector('.contenedor').style.backgroundColor = "#04293A";
-//         document.querySelector('ul').style.backgroundColor = "#04293A";
-//         document.querySelector('#toogle').style.color = "white";
-//         document.querySelector('h1').style.color = "white";
-//         empty.style.color = "white";
+    empty()
 
-//         dark_mode = false;
-//         localStorage.setItem('pageView',JSON.stringify(dark_mode));
-//     } else {
-//         document.querySelector('.container').style.backgroundColor = "green";
-//         document.querySelector('ul').style.backgroundColor = "white";
-//         document.querySelector('#toogle').style.color = "black";
-//         document.querySelector('h1').style.color = "darkslategrey";
-//         empty.style.color = "black";
+    if(document.body.classList.contains('dark')) {
+        localStorage.setItem('dark-mode', 'true');
+    } else {
+        localStorage.setItem('dark-mode', 'false')
+    }
+    
+})
 
-//         dark_mode = true;
-//         localStorage.setItem('pageView',JSON.stringify(dark_mode));
-//     }
-// }
+if(localStorage.getItem('dark-mode') === 'true') {
+    document.body.classList.add('dark')
+} else {
+    document.body.classList.remove('dark')
+}
