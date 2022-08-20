@@ -37,6 +37,7 @@ function vacioLogin(email, pass) {
 }
 
 function valEmail(valor){  
+    const email = valor
     
     re=/^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,3})$/
     if(!re.exec(valor)) {
@@ -58,6 +59,29 @@ function valEmail(valor){
 
     } else {
 
+       bloqueados(email)
+
+        return true;
+    }
+
+}
+
+function bloqueados(email) {
+    if(email == "bryancastillo@gmail.com" || email == "cristiancriss83@gmail.com") {
+        swal.fire({
+            icon: 'info',
+            text:'Disculpe pero su usuario bloqueado',
+            showConfirmButton: false,
+            showClass: {
+                popup: 'animate__animated animate__shakeX'
+            },
+    
+            hideClass:{
+                popup: 'animate__animated animate__fadeOut'
+                }
+            });
+    } else {
+
         swal.fire({
             icon: 'success',
             text:'El usuario inicio sesión con exito.',
@@ -66,12 +90,9 @@ function valEmail(valor){
             });
     
             window.location.href = "/index.html";
-
-        return true;
     }
 
+
 }
-
-
 
 
