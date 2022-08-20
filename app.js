@@ -15,51 +15,66 @@ mostrar();
 agregar.addEventListener("click", (e) => {
     e.preventDefault();
     const name = nombre.value;
-    const lastName = apellido.value;
-    const phone = telefono.value;
-    const address = direccion.value;
 
-    const contacto = {
-        name,
-        lastName,
-        phone,
-        address,
-        id
+    if (name !== "") {
+        const lastName = apellido.value;
+        const phone = telefono.value;
+        const address = direccion.value;
+
+        const contacto = {
+            name,
+            lastName,
+            phone,
+            address,
+            id
+        }
+
+        contactos = [...contactos,contacto]
+        localStorage.setItem("Contacts",JSON.stringify(contactos));
+        const p = document.createElement('p');
+        p.innerHTML = `<b>${name} ${lastName}<b/> <br/> ${phone} <br/> ${address}`;
+
+        const div = document.createElement("div");
+        const li = document.createElement('li');
+        const img = document.createElement('img');
+        img.src = "https://img.icons8.com/fluency-systems-filled/35/000000/user.png";    
+        img.className = 'photo';
+        
+        li.appendChild(img);
+        li.appendChild(p);
+        div.appendChild(desplegar());
+        div.appendChild(borrar());
+        li.appendChild(div);
+        
+    
+        ul.appendChild(li);
+
+        swal.fire({
+            icon: 'success',
+            text:'Contacto agregado correctamente',
+            showConfirmButton: false,
+        }); 
+
+        nombre.value = "";
+        apellido.value = "";
+        telefono.value = "";
+        direccion.value = "";
+        ul.style.display = "flex";
+
+        empty();
+    } else{
+        swal.fire({
+            icon: 'info',
+            text:'Los campos estan vacios',
+            showConfirmButton: false,
+            showClass: {
+                popup: 'animate__animated animate__shakeX'
+            },
+            hideClass:{
+                popup: 'animate__animated animate__fadeOut'
+            }
+        }); 
     }
-
-    contactos = [...contactos,contacto]
-    localStorage.setItem("Contacts",JSON.stringify(contactos));
-    const p = document.createElement('p');
-    p.innerHTML = `<b>${name} ${lastName}<b/> <br/> ${phone} <br/> ${address}`;
-
-    const div = document.createElement("div");
-    const li = document.createElement('li');
-    const img = document.createElement('img');
-    img.src = "https://img.icons8.com/fluency-systems-filled/35/000000/user.png";    
-    img.className = 'photo';
-    
-    li.appendChild(img);
-    li.appendChild(p);
-    div.appendChild(desplegar());
-    div.appendChild(borrar());
-    li.appendChild(div);
-    
-   
-    ul.appendChild(li);
-
-    swal.fire({
-        icon: 'success',
-        text:'Contacto agregado correctamente',
-        showConfirmButton: false,
-    });
-
-    nombre.value = "";
-    apellido.value = "";
-    telefono.value = "";
-    direccion.value = "";
-    ul.style.display = "flex";
-
-    empty();
 })
 
 
