@@ -7,6 +7,7 @@ const btn_mode = document.querySelector('#toogle')
 const agregar = document.getElementById('btn-agregar');
 const vacio = document.querySelector('.vacio');
 const main = document.getElementById('main');
+const logOut = document.getElementById('log-Out')
 let contactos = []
 let id = Date.now();
 
@@ -43,7 +44,6 @@ agregar.addEventListener("click", (e) => {
         
         li.appendChild(img);
         li.appendChild(p);
-        div.appendChild(desplegar());
         div.appendChild(borrar());
         li.appendChild(div);
         
@@ -53,7 +53,7 @@ agregar.addEventListener("click", (e) => {
         swal.fire({
             icon: 'success',
             text:'Contacto agregado correctamente',
-            showConfirmButton: false,
+            showConfirmButton: true,
         }); 
 
         nombre.value = "";
@@ -68,7 +68,7 @@ agregar.addEventListener("click", (e) => {
         swal.fire({
             icon: 'info',
             text:'Completa los campos vacios',
-            showConfirmButton: false,
+            showConfirmButton: true,
             showClass: {
                 popup: 'animate__animated animate__shakeX'
             },
@@ -93,31 +93,12 @@ function mostrar(){
             img.className = 'photo';
             li.appendChild(img);
             li.appendChild(p);
-            div.appendChild(desplegar());
             div.appendChild(borrar());
             li.appendChild(div);
             ul.appendChild(li);
         });
         empty();
     })
-}
-
-function desplegar() {
-    const desplegado = document.getElementById('desplegado')
-    const despliegue = document.createElement('button');
-    despliegue.innerHTML = `<img src="https://img.icons8.com/windows/25/000000/resize-diagonal--v1.png"/>`;
-    despliegue.className = "despliegueBTN";
-    despliegue.addEventListener("click", (e) => {
-        const target = e.target.parentNode.parentNode.parentNode;
-        desplegado.innerHTML = `${target.textContent}`;
-
-        console.log(target)
-        console.log(desplegado)
-        desplegado.style.display = 'flex'
-       
-    });
-
-    return despliegue;
 }
 
 
@@ -138,7 +119,7 @@ function borrar() {
         swal.fire({
             icon: 'warning',
             text:'Contacto eliminado correctamente',
-            showConfirmButton: false,
+            showConfirmButton: true,
         });
     });
     
@@ -201,3 +182,21 @@ if(localStorage.getItem('dark-mode') === 'true') {
 } else {
     document.body.classList.remove('dark')
 }
+
+function ventana() {
+    window.location.href = "/login.html"
+}
+
+logOut.addEventListener("click", () => {
+
+    swal.fire({
+        icon: 'success',
+        text:'Sesion ha cerrado correctamente',
+        showConfirmButton: true,
+    })
+
+    setTimeout(ventana, 2000);
+
+})
+
+

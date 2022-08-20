@@ -24,7 +24,7 @@ function vacioLogin(email, pass) {
         swal.fire({
         icon: 'info',
         text:'Completa los campos vacios',
-        showConfirmButton: false,
+        showConfirmButton: true,
         showClass: {
             popup: 'animate__animated animate__shakeX'
         },
@@ -45,7 +45,7 @@ function valEmail(valor){
         swal.fire({
             icon: 'info',
             text:'EL correo no es valido',
-            showConfirmButton: false,
+            showConfirmButton: true,
             showClass: {
                 popup: 'animate__animated animate__shakeX'
             },
@@ -71,7 +71,7 @@ function bloqueados(email) {
         swal.fire({
             icon: 'info',
             text:'Disculpe pero su usuario bloqueado',
-            showConfirmButton: false,
+            showConfirmButton: true,
             showClass: {
                 popup: 'animate__animated animate__shakeX'
             },
@@ -85,14 +85,17 @@ function bloqueados(email) {
         swal.fire({
             icon: 'success',
             text:'El usuario inicio sesión con exito.',
-            showConfirmButton: false,
+            showConfirmButton: true,
     
             });
+
+            correo.value = "";
+            clave.value = "";
     
-            window.location.href = "/index.html";
+            setTimeout(ventana, 2000);
     }
-
-
 }
 
-
+function ventana() {
+    window.location.href = "/index.html"
+}
