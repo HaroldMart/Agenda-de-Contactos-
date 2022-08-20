@@ -7,12 +7,11 @@ const btn_mode = document.querySelector('#toogle')
 const agregar = document.getElementById('btn-agregar');
 const vacio = document.querySelector('.vacio');
 const main = document.getElementById('main');
-const logOut = document.getElementById('log-Out')
-let contactos = []
+const logOut = document.getElementById('log-Out');
+let contactos = [];
 let id = Date.now();
 
 mostrar();
-
 
 agregar.addEventListener("click", (e) => {
     e.preventDefault();
@@ -22,16 +21,16 @@ agregar.addEventListener("click", (e) => {
     const address = direccion.value;
 
     if (name !== "" & lastName !== "" & phone !== "" & address !== "") {
-        
+
         const contacto = {
             name,
             lastName,
             phone,
             address,
             id
-        }
+        };
 
-        contactos = [...contactos,contacto]
+        contactos = [...contactos,contacto];
         localStorage.setItem("Contacts",JSON.stringify(contactos));
         const p = document.createElement('p');
         p.innerHTML = `<b>${name} ${lastName}<b/> <br/> ${phone} <br/> ${address}`;
@@ -46,8 +45,6 @@ agregar.addEventListener("click", (e) => {
         li.appendChild(p);
         div.appendChild(borrar());
         li.appendChild(div);
-        
-    
         ul.appendChild(li);
 
         swal.fire({
@@ -61,10 +58,10 @@ agregar.addEventListener("click", (e) => {
         telefono.value = "";
         direccion.value = "";
         ul.style.display = "flex";
-
         empty();
         
     } else{
+
         swal.fire({
             icon: 'info',
             text:'Completa los campos vacios',
@@ -72,16 +69,16 @@ agregar.addEventListener("click", (e) => {
             showClass: {
                 popup: 'animate__animated animate__shakeX'
             },
+
             hideClass:{
                 popup: 'animate__animated animate__fadeOut'
-            }
-        }); 
-    }
-})
-
+            }}); 
+    };
+});
 
 function mostrar(){
     document.addEventListener('DOMContentLoaded',() => {
+
         contactos = JSON.parse(localStorage.getItem("Contacts"));
         contactos.forEach(contacto => {
             const p = document.createElement('p');
@@ -97,13 +94,14 @@ function mostrar(){
             li.appendChild(div);
             ul.appendChild(li);
         });
-        empty();
-    })
-}
 
+        empty();
+    });
+};
 
 function borrar() {
     const borrarBtn = document.createElement("button");
+
     borrarBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" id="Outline" viewBox="0 0 24 24" width="30" height="25"><path d="M21,4H17.9A5.009,5.009,0,0,0,13,0H11A5.009,5.009,0,0,0,6.1,4H3A1,1,0,0,0,3,6H4V19a5.006,5.006,0,0,0,5,5h6a5.006,5.006,0,0,0,5-5V6h1a1,1,0,0,0,0-2ZM11,2h2a3.006,3.006,0,0,1,2.829,2H8.171A3.006,3.006,0,0,1,11,2Zm7,17a3,3,0,0,1-3,3H9a3,3,0,0,1-3-3V6H18Z"/><path d="M10,18a1,1,0,0,0,1-1V11a1,1,0,0,0-2,0v6A1,1,0,0,0,10,18Z"/><path d="M14,18a1,1,0,0,0,1-1V11a1,1,0,0,0-2,0v6A1,1,0,0,0,14,18Z"/></svg>';
     borrarBtn.setAttribute("id", id);
     borrarBtn.className = "borrarBtn";
@@ -122,10 +120,9 @@ function borrar() {
             showConfirmButton: true,
         });
     });
-    
+
     return borrarBtn;
 }
-
 
 function empty() {
     const items = document.querySelectorAll("li");
@@ -134,21 +131,21 @@ function empty() {
             ul.style.display = "none";
             main.style.boxShadow = 'box-shadow: 0px 0px 6px black;'
 
-            const body = document.querySelector('body')
+            const body = document.querySelector('body');
 
             if (body.className === 'dark') {
                 main.style.backgroundColor = '#15323e';
-                main.style.color = 'white'
+                main.style.color = 'white';
             } else {
                 main.style.backgroundColor = 'rgb(232, 232, 232)';
-                main.style.color = 'black'
+                main.style.color = 'black';
             }
-            
+
         } else{
             vacio.style.display = "none";
             main.style.backgroundColor = "transparent";
-        }   
-}
+        };
+};
 
 document.addEventListener("keyup", e => {
     if (e.target.matches('.buscar')){
@@ -159,33 +156,32 @@ document.addEventListener("keyup", e => {
             contacto.textContent.toLowerCase().includes(e.target.value.toLowerCase())
                 ?contacto.classList.remove('filtro')
                 :contacto.classList.add('filtro');
-        })
-    }
-    console.log(e.target.value)
-})
+        });
+    };
+
+    console.log(e.target.value);
+});
 
 btn_mode.addEventListener("click", () => {
-    document.body.classList.toggle('dark')
-
-    empty()
+    document.body.classList.toggle('dark');
+    empty();
 
     if(document.body.classList.contains('dark')) {
         localStorage.setItem('dark-mode', 'true');
     } else {
-        localStorage.setItem('dark-mode', 'false')
-    }
-    
-})
+        localStorage.setItem('dark-mode', 'false');
+    };
+});
 
 if(localStorage.getItem('dark-mode') === 'true') {
-    document.body.classList.add('dark')
+    document.body.classList.add('dark');
 } else {
-    document.body.classList.remove('dark')
-}
+    document.body.classList.remove('dark');
+};
 
 function ventana() {
-    window.location.href = "/login.html"
-}
+    window.location.href = "/login.html";
+};
 
 logOut.addEventListener("click", () => {
 
@@ -193,10 +189,10 @@ logOut.addEventListener("click", () => {
         icon: 'success',
         text:'Sesion ha cerrado correctamente',
         showConfirmButton: true,
-    })
+    });
 
     setTimeout(ventana, 2000);
 
-})
+});
 
 

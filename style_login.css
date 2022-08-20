@@ -9,11 +9,6 @@ body {
     box-sizing: border-box;
 }
 
-.contenedor{
-    width: 100%;
-    padding: 30px;
-}
-
 .formulario{
     z-index: 3;
     position: absolute;
@@ -37,6 +32,11 @@ input[type="password"]{
     width: 82%;
     padding: 20px;
     border: none;
+}
+
+.contenedor{
+    width: 100%;
+    padding: 30px;
 }
 
 .input-contenedor{
@@ -79,19 +79,6 @@ p{
      color: rgb(46, 59, 126);
 }
 
-footer {
-    top: 560px;
-    position: absolute;
-    z-index: 2;
-    background-color: rgb(18, 45, 86);
-    color: white;
-    width: 100%;
-    padding: 30px;
-    font-size: 17px;
-    height: 150px;
-    
-}
-
 img {
     position: absolute;
     z-index: 1;
@@ -107,8 +94,17 @@ img {
     right: 160px;
 }
 
-
-
+footer {
+    top: 560px;
+    position: absolute;
+    z-index: 2;
+    background-color: rgb(18, 45, 86);
+    color: white;
+    width: 100%;
+    padding: 30px;
+    font-size: 17px;
+    height: 150px;
+}
 
 
 
