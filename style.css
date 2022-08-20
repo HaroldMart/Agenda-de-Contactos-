@@ -1,3 +1,21 @@
+@media (prefers-color-scheme: light){
+    :root{
+      --bg-color: rgb(232, 232, 232);
+      --toogle-color: black;
+      --h2-color: black; 
+      --text-color: black;
+    }
+  }
+  
+@media (prefers-color-scheme: dark){
+    :root{
+      --bg-color: #15323e;
+      --toogle-color: white;
+      --h2-color: white; 
+      --text-color: white;
+    }
+}
+
 body {
     box-sizing: border-box;
     display: flex;
@@ -7,7 +25,7 @@ body {
     align-items: center;
     box-sizing: border-box;
     background-color: #2B4865;
-    color: rgb(41, 68, 109);
+    color: var(--text-color);
 }
 
 .main {
@@ -22,14 +40,14 @@ body {
 
 h2 {
     margin: 0;
-    color: #073458;
+    color: var(--h2-color);
 }
 
 .contenedor{
     display: flex;
     border-radius: 10px;
     color: rgb(0, 0, 0);
-    background-color: rgb(233, 233, 233);
+    background-color: var(--bg-color);
     box-shadow: 0px 0px 6px black;
 }
 
@@ -51,7 +69,7 @@ h2 {
     justify-content: center;
     align-items: center;
     border-radius: 10px;
-    background-color: rgb(233, 233, 233);
+    background-color: var(--bg-color);
 }
 
 input{
@@ -144,7 +162,7 @@ li{
     width: 100%;
     list-style-type: none;
     border-radius: 10px;
-    background-color: rgb(233, 233, 233);
+    background-color: var(--bg-color);
     padding: 10px;
     box-sizing: border-box;
     justify-content: space-between;
@@ -162,7 +180,7 @@ li:hover{
     flex-wrap: wrap;
     justify-content: center;
     text-align: center;
-    background-color: rgb(233, 233, 233);
+    background-color: var(--bg-color);
 }
 
 .despliegueBTN {
