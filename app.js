@@ -16,12 +16,12 @@ mostrar();
 agregar.addEventListener("click", (e) => {
     e.preventDefault();
     const name = nombre.value;
+    const lastName = apellido.value;
+    const phone = telefono.value;
+    const address = direccion.value;
 
-    if (name !== "") {
-        const lastName = apellido.value;
-        const phone = telefono.value;
-        const address = direccion.value;
-
+    if (name !== "" & lastName !== "" & phone !== "" & address !== "") {
+        
         const contacto = {
             name,
             lastName,
@@ -63,10 +63,11 @@ agregar.addEventListener("click", (e) => {
         ul.style.display = "flex";
 
         empty();
+        
     } else{
         swal.fire({
             icon: 'info',
-            text:'Los campos estan vacios',
+            text:'Completa los campos vacios',
             showConfirmButton: false,
             showClass: {
                 popup: 'animate__animated animate__shakeX'
