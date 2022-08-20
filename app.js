@@ -47,6 +47,12 @@ agregar.addEventListener("click", (e) => {
    
     ul.appendChild(li);
 
+    swal.fire({
+        icon: 'success',
+        text:'Contacto agregado correctamente',
+        showConfirmButton: false,
+    });
+
     nombre.value = "";
     apellido.value = "";
     telefono.value = "";
@@ -111,6 +117,12 @@ function borrar() {
         console.log(contactos);
         localStorage.setItem('Contacts', JSON.stringify(contactos));
         empty();
+
+        swal.fire({
+            icon: 'warning',
+            text:'Contacto eliminado correctamente',
+            showConfirmButton: false,
+        });
     });
     
     return borrarBtn;
