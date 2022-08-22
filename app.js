@@ -4,16 +4,61 @@ const telefono = document.getElementById('telefono');
 const direccion = document.getElementById('direccion');
 const ul = document.querySelector('ul');
 const btn_mode = document.querySelector('#toogle')
-const agregar = document.getElementById('btn-agregar');
+const add = document.getElementById('btn-agregar');
 const vacio = document.querySelector('.vacio');
 const main = document.getElementById('main');
 const logOut = document.getElementById('log-Out');
 let contactos = [];
 let id = Date.now();
 
-mostrar();
+F_show();
 
-agregar.addEventListener("click", (e) => {
+document.addEventListener("keyup", e => {
+    if (e.target.matches('.buscar')){
+
+        if(e.key === 'Escape')e.target.value = "";
+
+        document.querySelectorAll('li').forEach(contacto => {
+            contacto.textContent.toLowerCase().includes(e.target.value.toLowerCase())
+                ?contacto.classList.remove('filtro')
+                :contacto.classList.add('filtro');
+        });
+    };
+
+    console.log(e.target.value);
+});
+
+logOut.addEventListener("click", () => {
+    const name = nombre.value;
+    const lastName = apellido.value;
+    const phone = telefono.value;
+    const address = direccion.value;
+
+    logOut_empty(name, lastName, phone, address)
+
+});
+
+if(localStorage.getItem('dark-mode') === 'true') {
+    document.body.classList.add('dark');
+} else {
+    document.body.classList.remove('dark');
+};
+
+function ventana() {
+    window.location.href = "/login.html";
+};
+
+btn_mode.addEventListener("click", () => {
+    const name = nombre.value;
+    const lastName = apellido.value;
+    const phone = telefono.value;
+    const address = direccion.value;
+
+    dark_mode_empty(name, lastName, phone, address)
+
+});
+
+add.addEventListener("click", (e) => {
     e.preventDefault();
 
     const name = nombre.value;
@@ -23,7 +68,7 @@ agregar.addEventListener("click", (e) => {
 
     if (name !== "" & lastName !== "" & phone !== "" & address !== "") {
         
-        ValidarNombre(name, lastName, phone, address);
+        valName(name, lastName, phone, address);
         
     } else{
 
@@ -41,7 +86,7 @@ agregar.addEventListener("click", (e) => {
     };
 });
 
-function mostrar(){
+function F_show(){
     document.addEventListener('DOMContentLoaded',() => {
 
         contactos = JSON.parse(localStorage.getItem("Contacts")) || [];
@@ -55,7 +100,7 @@ function mostrar(){
             img.className = 'photo';
             li.appendChild(img);
             li.appendChild(p);
-            div.appendChild(borrar());
+            div.appendChild(F_delete());
             li.appendChild(div);
             ul.appendChild(li);
         });
@@ -64,7 +109,7 @@ function mostrar(){
     });
 };
 
-function borrar() {
+function F_delete() {
     const borrarBtn = document.createElement("button");
 
     borrarBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" id="Outline" viewBox="0 0 24 24" width="30" height="25"><path d="M21,4H17.9A5.009,5.009,0,0,0,13,0H11A5.009,5.009,0,0,0,6.1,4H3A1,1,0,0,0,3,6H4V19a5.006,5.006,0,0,0,5,5h6a5.006,5.006,0,0,0,5-5V6h1a1,1,0,0,0,0-2ZM11,2h2a3.006,3.006,0,0,1,2.829,2H8.171A3.006,3.006,0,0,1,11,2Zm7,17a3,3,0,0,1-3,3H9a3,3,0,0,1-3-3V6H18Z"/><path d="M10,18a1,1,0,0,0,1-1V11a1,1,0,0,0-2,0v6A1,1,0,0,0,10,18Z"/><path d="M14,18a1,1,0,0,0,1-1V11a1,1,0,0,0-2,0v6A1,1,0,0,0,14,18Z"/></svg>';
@@ -88,7 +133,7 @@ function borrar() {
     });
 
     return borrarBtn;
-}
+};
 
 function empty() {
     const items = document.querySelectorAll("li");
@@ -113,55 +158,7 @@ function empty() {
         };
 };
 
-document.addEventListener("keyup", e => {
-    if (e.target.matches('.buscar')){
-
-        if(e.key === 'Escape')e.target.value = "";
-
-        document.querySelectorAll('li').forEach(contacto => {
-            contacto.textContent.toLowerCase().includes(e.target.value.toLowerCase())
-                ?contacto.classList.remove('filtro')
-                :contacto.classList.add('filtro');
-        });
-    };
-
-    console.log(e.target.value);
-});
-
-
-btn_mode.addEventListener("click", () => {
-    const name = nombre.value;
-    const lastName = apellido.value;
-    const phone = telefono.value;
-    const address = direccion.value;
-
-    dark_mode_empty(name, lastName, phone, address)
-
-});
-
-
-if(localStorage.getItem('dark-mode') === 'true') {
-    document.body.classList.add('dark');
-} else {
-    document.body.classList.remove('dark');
-};
-
-function ventana() {
-    window.location.href = "/login.html";
-};
-
-logOut.addEventListener("click", () => {
-    const name = nombre.value;
-    const lastName = apellido.value;
-    const phone = telefono.value;
-    const address = direccion.value;
-
-    logOut_empty(name, lastName, phone, address)
-
-    });
-
-
-function ValidarNombre(name, lastName, phone, address) {
+function valName(name, lastName, phone, address) {
 
     const re=/^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,3})$/
 
@@ -182,10 +179,10 @@ function ValidarNombre(name, lastName, phone, address) {
             hideClass:{
                 popup: 'animate__animated animate__fadeOut'
             }}); 
-    }
-}
+    };
+};
 
-function agregarContactos(name, lastName, phone, address) {
+function addContacs(name, lastName, phone, address) {
 
         const contacto = {
             name,
@@ -208,7 +205,7 @@ function agregarContactos(name, lastName, phone, address) {
         
         li.appendChild(img);
         li.appendChild(p);
-        div.appendChild(borrar());
+        div.appendChild(F_delete());
         li.appendChild(div);
         ul.appendChild(li);
 
@@ -259,8 +256,8 @@ function dark_mode_empty(name, lastName, phone, address) {
             icon: 'warning',
             text:'Limpia los campos para poder agregar el modo oscuro correctamente',
             showConfirmButton: true,})
-    }
-}
+    };
+};
 
 function logOut_empty(name, lastName, phone, address) {
     if (name === "" & lastName === "" & phone === "" & address === "") {
@@ -280,8 +277,8 @@ function logOut_empty(name, lastName, phone, address) {
             showConfirmButton: true,
             timer: 3000
         });
-    }
-}
+    };
+};
 
 function isNa_phone(name, lastName, phone, address) {
     const telefono = phone
@@ -295,6 +292,6 @@ function isNa_phone(name, lastName, phone, address) {
         });
 
     } else {
-        agregarContactos(name, lastName, phone, address);
-    }
-}
+        addContacs(name, lastName, phone, address);
+    };
+};
