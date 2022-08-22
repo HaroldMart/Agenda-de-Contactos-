@@ -1,18 +1,45 @@
 const boton = document.getElementById('button');
 const correo = document.getElementById('correo');
 const clave = document.getElementById('clave');
+const register = document.querySelector('.button_register')
 
 boton.addEventListener("click", (e) => {
     e.preventDefault();
+
     const email = correo.value;
     const pass = clave.value;
 
     vacioLogin(email, pass);
 });
 
+function credenciales(email, pass) {
+
+    const usuario1 = ['haroldy@gmail.com', '1234']
+    const usuario2 = ['bryan@gmail.com', '5678']
+
+    if(email == usuario1[0] & pass == usuario1[1] || email == usuario2[0] & pass == usuario2[1]) {
+            
+        swal.fire({
+        icon: 'success',
+        text:'El usuario inicio sesión con exito.',
+         showConfirmButton: true,});
+
+        correo.value = "";
+        clave.value = "";
+
+        setTimeout(ventana, 3000);
+    } else {
+
+        swal.fire({
+            icon: 'info',
+            text:'Revisa el correo o la clave de nuevo, no estas registrado',
+            showConfirmButton: true,});
+        }
+}
+
 function vacioLogin(email, pass) {
     if(email !== "" & pass !== "") {
-        valEmail(email);
+        valEmail(email, pass);
 
     } else {
         swal.fire({
@@ -31,10 +58,12 @@ function vacioLogin(email, pass) {
     };
 };
 
-function valEmail(valor){  
+function valEmail(valor, clave){  
     const email = valor;
+    const pass = clave;
 
-    re=/^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,3})$/
+    const re=/^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,3})$/
+
     if(!re.exec(valor)) {
 
         swal.fire({
@@ -53,17 +82,17 @@ function valEmail(valor){
         return false;
 
     } else {
-       bloqueados(email);
+       bloqueados(email, pass);
 
         return true;
     };
 };
 
-function bloqueados(email) {
+function bloqueados(email, pass) {
     if(email == "bryancastillo@gmail.com" || email == "cristiancriss83@gmail.com") {
         swal.fire({
             icon: 'warning',
-            text:'Este usuario bloqueado',
+            text:'Este usuario esta bloqueado',
             showConfirmButton: true,
             showClass: {
                 popup: 'animate__animated animate__shakeX'
@@ -74,18 +103,14 @@ function bloqueados(email) {
             });
 
     } else {
-        swal.fire({
-            icon: 'success',
-            text:'El usuario inicio sesión con exito.',
-            showConfirmButton: true,});
-
-            correo.value = "";
-            clave.value = "";
-    
-            setTimeout(ventana, 2000);
+        credenciales(email, pass)
     }
 }
 
 function ventana() {
     window.location.href = "/index.html";
 }
+
+register.addEventListener('click', () => {
+    window.location.href = "/register.html"
+})

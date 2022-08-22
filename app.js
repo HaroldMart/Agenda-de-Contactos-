@@ -15,50 +15,15 @@ mostrar();
 
 agregar.addEventListener("click", (e) => {
     e.preventDefault();
+
     const name = nombre.value;
     const lastName = apellido.value;
     const phone = telefono.value;
     const address = direccion.value;
 
     if (name !== "" & lastName !== "" & phone !== "" & address !== "") {
-
-        const contacto = {
-            name,
-            lastName,
-            phone,
-            address,
-            id
-        };
-
-        contactos = [...contactos,contacto];
-        localStorage.setItem("Contacts",JSON.stringify(contactos));
-        const p = document.createElement('p');
-        p.innerHTML = `<b>${name} ${lastName}<b/> <br/> ${phone} <br/> ${address}`;
-
-        const div = document.createElement("div");
-        const li = document.createElement('li');
-        const img = document.createElement('img');
-        img.src = "https://img.icons8.com/fluency-systems-filled/35/000000/user.png";    
-        img.className = 'photo';
         
-        li.appendChild(img);
-        li.appendChild(p);
-        div.appendChild(borrar());
-        li.appendChild(div);
-        ul.appendChild(li);
-
-        swal.fire({
-            icon: 'success',
-            text:'Contacto agregado correctamente',
-            showConfirmButton: true,
-        }); 
-
-        nombre.value = "";
-        apellido.value = "";
-        telefono.value = "";
-        direccion.value = "";
-        ul.style.display = "flex";
-        empty();
+        ValidarNombre(name, lastName, phone, address);
         
     } else{
 
@@ -79,7 +44,7 @@ agregar.addEventListener("click", (e) => {
 function mostrar(){
     document.addEventListener('DOMContentLoaded',() => {
 
-        contactos = JSON.parse(localStorage.getItem("Contacts"));
+        contactos = JSON.parse(localStorage.getItem("Contacts")) || [];
         contactos.forEach(contacto => {
             const p = document.createElement('p');
             const li = document.createElement('li');
@@ -118,6 +83,7 @@ function borrar() {
             icon: 'warning',
             text:'Contacto eliminado correctamente',
             showConfirmButton: true,
+            timer: 3000
         });
     });
 
@@ -162,16 +128,17 @@ document.addEventListener("keyup", e => {
     console.log(e.target.value);
 });
 
-btn_mode.addEventListener("click", () => {
-    document.body.classList.toggle('dark');
-    empty();
 
-    if(document.body.classList.contains('dark')) {
-        localStorage.setItem('dark-mode', 'true');
-    } else {
-        localStorage.setItem('dark-mode', 'false');
-    };
+btn_mode.addEventListener("click", () => {
+    const name = nombre.value;
+    const lastName = apellido.value;
+    const phone = telefono.value;
+    const address = direccion.value;
+
+    dark_mode_empty(name, lastName, phone, address)
+
 });
+
 
 if(localStorage.getItem('dark-mode') === 'true') {
     document.body.classList.add('dark');
@@ -184,15 +151,150 @@ function ventana() {
 };
 
 logOut.addEventListener("click", () => {
+    const name = nombre.value;
+    const lastName = apellido.value;
+    const phone = telefono.value;
+    const address = direccion.value;
 
-    swal.fire({
-        icon: 'success',
-        text:'Sesion ha cerrado correctamente',
-        showConfirmButton: true,
+    logOut_empty(name, lastName, phone, address)
+
     });
 
-    setTimeout(ventana, 2000);
 
-});
+function ValidarNombre(name, lastName, phone, address) {
 
+    const re=/^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,3})$/
 
+    if(!re.exec(name)) {
+
+        isNa_phone(name, lastName, phone, address)
+
+    } else {
+
+        swal.fire({
+            icon: 'warning',
+            text:'El nombre de usuario no es valido',
+            showConfirmButton: true,
+            showClass: {
+                popup: 'animate__animated animate__shakeX'
+            },
+
+            hideClass:{
+                popup: 'animate__animated animate__fadeOut'
+            }}); 
+    }
+}
+
+function agregarContactos(name, lastName, phone, address) {
+
+        const contacto = {
+            name,
+            lastName,
+            phone,
+            address,
+            id
+        };
+
+        contactos = [...contactos,contacto];
+        localStorage.setItem("Contacts",JSON.stringify(contactos));
+        const p = document.createElement('p');
+        p.innerHTML = `<b>${name} ${lastName}<b/> <br/> ${phone} <br/> ${address}`;
+
+        const div = document.createElement("div");
+        const li = document.createElement('li');
+        const img = document.createElement('img');
+        img.src = "https://img.icons8.com/fluency-systems-filled/35/000000/user.png";    
+        img.className = 'photo';
+        
+        li.appendChild(img);
+        li.appendChild(p);
+        div.appendChild(borrar());
+        li.appendChild(div);
+        ul.appendChild(li);
+
+        swal.fire({
+            icon: 'success',
+            text:'Contacto agregado correctamente',
+            showConfirmButton: true,
+            timer: 3000
+        }); 
+
+        nombre.value = "";
+        apellido.value = "";
+        telefono.value = "";
+        direccion.value = "";
+        ul.style.display = "flex";
+        empty();
+}
+
+function dark_mode_empty(name, lastName, phone, address) {
+
+    if (name === "" & lastName === "" & phone === "" & address === "") {
+        document.body.classList.toggle('dark');
+        empty();
+
+        if(document.body.classList.contains('dark')) {
+            localStorage.setItem('dark-mode', 'true');
+            swal.fire({
+                icon: 'success',
+                text:'Modo oscuro activado correctamente',
+                showConfirmButton: true,
+                timer: 3000
+            });
+                
+
+        } else {
+            localStorage.setItem('dark-mode', 'false');
+            swal.fire({
+                icon: 'success',
+                text:'Modo oscuro desactivado correctamente',
+                showConfirmButton: true,
+                timer: 3000
+            });
+                
+        };
+        
+    } else {
+        swal.fire({
+            icon: 'warning',
+            text:'Limpia los campos para poder agregar el modo oscuro correctamente',
+            showConfirmButton: true,})
+    }
+}
+
+function logOut_empty(name, lastName, phone, address) {
+    if (name === "" & lastName === "" & phone === "" & address === "") {
+        swal.fire({
+            icon: 'success',
+            text:'Sesion ha cerrado correctamente',
+            showConfirmButton: true,
+            timer: 3000
+        });
+    
+        setTimeout(ventana, 2000);
+
+    } else {
+        swal.fire({
+            icon: 'info',
+            text:'Ups!!, Antes de salir, limpia los campos o termina de agregar el contacto',
+            showConfirmButton: true,
+            timer: 3000
+        });
+    }
+}
+
+function isNa_phone(name, lastName, phone, address) {
+    const telefono = phone
+    if(isNaN(telefono)) {
+
+        swal.fire({
+            icon: 'info',
+            text:'Solo se permiten numeros en el campo de telefono',
+            showConfirmButton: true,
+            timer: 3000
+        });
+
+    } else {
+        agregarContactos(name, lastName, phone, address);
+    }
+}
