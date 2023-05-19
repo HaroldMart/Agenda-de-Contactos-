@@ -1,6 +1,6 @@
 # Agenda-de-Contactos-
 
-In this project I used technologies such as PHP to make a page that would allow me to save data from employees of a company, this data is saved in a folder that is in the project.
+In this project I use HTML, CSS and JS, to save the contacts with their respective data in the localStorage of the browser.
 
 ![image](https://github.com/HaroldMart/Agenda-de-Contactos-/assets/93040571/09e1d338-677f-4350-b095-c2a53616ec78)
 
